@@ -52,6 +52,7 @@ public class Main {
         final Map<String, Brightness> menuItems = new TreeMap<>();
         menuItems.put("100 - 100", new Brightness(100));
         menuItems.put("100 - 1", new Brightness(100, 1));
+        menuItems.put("50 - 50", new Brightness(50));
         menuItems.put("10 - 1", new Brightness(10, 1));
         menuItems.put("1 - 1", new Brightness(1));
 

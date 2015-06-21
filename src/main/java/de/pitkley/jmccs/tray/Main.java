@@ -1,19 +1,17 @@
 package de.pitkley.jmccs.tray;
 
-import de.pitkley.jmccs.monitor.Monitor;
-import de.pitkley.jmccs.monitor.MonitorManager;
-import de.pitkley.jmccs.monitor.Monitors;
-import de.pitkley.jmccs.monitor.VCPCode;
+import de.pitkley.jmccs.monitor.*;
 
 import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
 
     final static MonitorManager monitorManager = Monitors.getMonitorManager();
-    final static List<Monitor> monitors = monitorManager.getMonitors();
+    final static List<MonitorHelper> monitors = monitorManager.getMonitors().stream().map(MonitorHelper::new).collect(Collectors.toList());
 
     private static class Brightness {
         final int mainBrightness;
@@ -30,11 +28,11 @@ public class Main {
     }
 
     private static void setBrightness(Brightness brightness) {
-        for (Monitor monitor : monitors) {
+        for (MonitorHelper monitor : monitors) {
             if (monitor.isMainMonitor()) {
-                monitor.setVCPFeature(VCPCode.LUMINANCE, brightness.mainBrightness);
+                monitor.setLuminance(brightness.mainBrightness);
             } else {
-                monitor.setVCPFeature(VCPCode.LUMINANCE, brightness.otherBrightness);
+                monitor.setLuminance(brightness.otherBrightness);
             }
         }
     }

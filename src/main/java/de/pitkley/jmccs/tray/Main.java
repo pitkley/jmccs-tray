@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    final static MonitorManager monitorManager = Monitors.getMonitorManager();
+    final static MonitorManager monitorManager = MonitorManager.get();
     final static List<MonitorHelper> monitors = monitorManager.getMonitors().stream().map(MonitorHelper::new).collect(Collectors.toList());
 
     private static class Brightness {
